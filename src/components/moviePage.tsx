@@ -8,7 +8,7 @@ export default function MoviePage() {
 
     const fetchMovie = async (id: string) => {
         try {
-            const response = await axios.get(`https://dummyapi.online/api/movies/${id}`);
+            const response = await axios.get(`https://kpu8ehxa4a.execute-api.us-east-1.amazonaws.com${id}`);
             setMovie(response.data); // Set the movie data from API response
         } catch (error) {
             console.error("Error fetching movie:", error);
@@ -28,7 +28,7 @@ export default function MoviePage() {
                 <section className="section">
                     <h1 className="title">{movie.movie}</h1>
                     <img
-                        src={`https://dummyapi.online/${movie.image}`}
+                        src={`https://kpu8ehxa4a.execute-api.us-east-1.amazonaws.com${movie.image}`}
                         alt={movie.movie}
                         onError={(e) => {
                             e.currentTarget.src = "https://m.media-amazon.com/images/S/pv-target-images/81ef275effa427553a847bc220bebe1dc314b2e79d00333f94a6bcadd7cce851.jpg"; // Fallback image

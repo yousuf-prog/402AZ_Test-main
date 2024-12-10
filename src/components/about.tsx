@@ -8,10 +8,10 @@ export default function About() {
                 <div className="hero-body" style={{ textAlign: "center" }}>
                     <div className="container">
                         <h1 className="title" style={{ fontSize: "3rem", fontWeight: "bold" }}>
-                            Welcome to the About Page
+                            This is my About Page
                         </h1>
                         <p className="subtitle" style={{ fontSize: "1.5rem", marginTop: "10px" }}>
-                            Learn more about our platform and what we offer
+                            Platform where you can find all your Favourite movies
                         </p>
                     </div>
                 </div>

@@ -6,11 +6,10 @@ import { Link } from "react-router-dom";
 export default function Movies() {
     const [movies, setMovies] = useState<Movie[]>([]);
     const [newMovie, setNewMovie] = useState<Movie>({
-        id: 0,
-        movie: "",
-        rating: 0,
-        image: "",
-        imdb_url: "",
+        id:"",
+        title:"",
+        writer:"",
+        image:"",
     });
 
     const fetchMovies = () => {
@@ -23,7 +22,7 @@ export default function Movies() {
             });
     };
 
-    const handleDelete = (id: number) => {
+    const handleDelete = (id: string) => {
         MovieService.remove(id.toString()) // Convert ID to string for API call
             .then(() => {
                 fetchMovies();
@@ -42,11 +41,10 @@ export default function Movies() {
                 fetchMovies();
                 alert("Movie added successfully.");
                 setNewMovie({
-                    id: 0,
-                    movie: "",
-                    rating: 0,
-                    image: "",
-                    imdb_url: "",
+                    id:"",
+                    title:"",
+                    writer:"",
+                    image:"",
                 }); // Reset the form
             })
             .catch((error) => {
@@ -62,7 +60,7 @@ export default function Movies() {
     return (
         <div className="container is-fluid">
             <section className="section">
-                <h1 className="title">Movie Catalogue</h1>
+                <h1 className="title">Cinema Library</h1>
             </section>
             <div className="columns is-multiline">
                 {movies.length > 0 ? (
@@ -70,16 +68,16 @@ export default function Movies() {
                         <div className="column is-one-quarter" key={movie.id}>
                             <div className="card">
                                 <div className="card-header">
-                                    <h2 className="card-header-title">{movie.movie}</h2>
+                                    <h2 className="card-header-title">{movie.title}</h2>
                                 </div>
                                 <div className="card-image">
                                     <figure className="image">
                                         <img
-                                            src={`https://dummyapi.online/${movie.image}`}
-                                            alt={movie.movie}
+                                            src={`${movie.writer}`}
+                                            alt={movie.title}
                                             onError={(e) => {
                                                 e.currentTarget.src =
-                                                    "https://m.media-amazon.com/images/S/pv-target-images/81ef275effa427553a847bc220bebe1dc314b2e79d00333f94a6bcadd7cce851.jpg";
+                                                    "https://m.media-amazon.com/images/S/pv-target-images/8ef275effa427553a847bc220bebe1dc314b2e79d00333f94a6bcadd7cce851.jpg";
                                             }}
                                         />
                                     </figure>
@@ -94,7 +92,7 @@ export default function Movies() {
                                     }}
                                 >
                                     <a
-                                        href={movie.imdb_url}
+                                        href={movie.title}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="button is-primary"
@@ -133,44 +131,55 @@ export default function Movies() {
                         <input
                             className="input"
                             type="text"
-                            value={newMovie.movie}
+                            value={newMovie.title}
                             onChange={(e) =>
-                                setNewMovie({ ...newMovie, movie: e.target.value })
+                                setNewMovie({ ...newMovie, title: e.target.value })
                             }
                             required
                         />
                     </div>
                     <div className="field">
-                        <label className="label">Rating</label>
+                        <label className="label">id</label>
                         <input
                             className="input"
                             type="number"
-                            value={newMovie.rating}
+                            value={newMovie.id}
                             onChange={(e) =>
-                                setNewMovie({ ...newMovie, rating: parseFloat(e.target.value) })
+                                setNewMovie({ ...newMovie, id: (e.target.value) })
                             }
                             required
                         />
                     </div>
                     <div className="field">
-                        <label className="label">Image URL</label>
+                        <label className="label">title</label>
+                        <input
+                            className="input"
+                            type="text"
+                            value={newMovie.title}
+                            onChange={(e) =>
+                                setNewMovie({ ...newMovie, title: e.target.value })
+                            }
+                        />
+                    </div>
+                    <div className="field">
+                        <label className="label">writer</label>
+                        <input
+                            className="input"
+                            type="text"
+                            value={newMovie.writer}
+                            onChange={(e) =>
+                                setNewMovie({ ...newMovie, writer: e.target.value })
+                            }
+                        />
+                    </div>
+                    <div className="field">
+                        <label className="label">image</label>
                         <input
                             className="input"
                             type="text"
                             value={newMovie.image}
                             onChange={(e) =>
                                 setNewMovie({ ...newMovie, image: e.target.value })
-                            }
-                        />
-                    </div>
-                    <div className="field">
-                        <label className="label">IMDb URL</label>
-                        <input
-                            className="input"
-                            type="text"
-                            value={newMovie.imdb_url}
-                            onChange={(e) =>
-                                setNewMovie({ ...newMovie, imdb_url: e.target.value })
                             }
                         />
                     </div>
